@@ -6,6 +6,10 @@ public class DGraph {
 	
 	private ArrayList<LinkedList<Edge>> adjList = new ArrayList<>(); 
 	private int numVertices;
+	private double lowestCost = Double.MAX_VALUE;
+	private List<Integer> lowestPath = new ArrayList<>();
+
+
 	
 	
 	
@@ -85,8 +89,6 @@ public class DGraph {
 				visited.add(bestCityToGo);
 				pathCost += curLength;
 				curPosition = bestCityToGo;
-	
-		
 		}
 		
 		for(Edge eachEdge : adjList.get(bestCityToGo-1)) {
@@ -94,13 +96,11 @@ public class DGraph {
 				pathCost += eachEdge.weight;
 			}
 		}
-
 		
 		for(int each :visited) {
 			System.out.println(each);
 		}
 		System.out.println(pathCost);
-	
 		return 2.1;
 
 		
@@ -120,20 +120,67 @@ public class DGraph {
 	
 	
 	public void BackTracking() {
+		double curCost = 0;
 		int cityNumber = numVertices;
 		boolean[] visited = new boolean[cityNumber];
+		visited[0] = true;		
+		List<Integer> curPath = new ArrayList<>();
+		curPath.add(1);
+		int curPos = 1;
 		
-		visited[0] = true;
-		double retVal = Double.MAX_VALUE;
-		
-				
-		
+		recBacktrack(curPath, curPos,  curCost);
+		for (int each : lowestPath) {
+			System.out.println(each);
+		}
+		System.out.println(lowestCost);
+
 	}
 	
-	private void recBacktrack(boolean[] visited, int curPos, double curCost)
 	
-	{
+	
+	@SuppressWarnings("unused")
+	private void recBacktrack(
+			List<Integer> curPath,
+			int curPos,
+			double curCost
+			)
+	{		
+		if(curPath.size()==numVertices) {	
 			
+			for(Edge eachEdge : adjList.get(curPos-1)) {		
+				if(eachEdge.label == 1) {
+					curCost += eachEdge.weight;
+					if(curCost < lowestCost) {
+						lowestCost = curCost;
+						lowestPath = new ArrayList<>(curPath);
+					}
+
+				}	
+			}
+		}
+		else {
+			for (Edge eachEdge : adjList.get(curPos-1)) {	
+				if(!curPath.contains(eachEdge.label)) {
+					curPath.add(eachEdge.label);
+					curCost += eachEdge.weight;
+					curPos = eachEdge.label;
+					recBacktrack(curPath, curPos, curCost);
+					curPath.remove(curPath.size()-1);
+					curCost -= eachEdge.weight;
+					curPos = curPath.get(curPath.size()-1);
+					
+				}
+					
+	
+				
+			}
+			
+			
+		}
+			
+		
+		
+		
 	}
 	
 	

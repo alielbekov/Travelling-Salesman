@@ -29,8 +29,6 @@ public class PA11Main {
 		    		  dg = new DGraph(Integer.parseInt(each[0]));
 
 		    	  }else {
-
-
 		    		  int u = Integer.parseInt(each[0]);
 		    		  int v =  Integer.parseInt(each[1]);
 		    		  double w = Double.parseDouble(each[2]);
@@ -38,7 +36,8 @@ public class PA11Main {
 		    		  
 		    	  }
 		      }
-		      dg.Heruistic();
+		     // dg.Heruistic();
+		      dg.BackTracking();
 		      System.out.println(dg);
 			
 		}catch(Exception e) {
