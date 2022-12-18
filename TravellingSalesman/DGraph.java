@@ -1,3 +1,20 @@
+
+/*
+ * Author: Ali Elbekov * File: DGraph.java
+ * Assignment: Travelling Salesman
+ * Course: CSC 210;  Fall 2022;
+ * Purpose: This program uses two sorts of algorithms to solve Travelling Salesman Problem.
+ * One of them is heuristic approach where lowest-weight neighboring city is chosen and proceeded to.
+ * The other approach is using recursive backtracking where we brute-force all the possible paths and return the best one.
+ * The program also includes an improved version of the brute-force approach where the program won't have to 
+ * iterate through unnecessary loops by skipping them once the travel cost is already more the the current lowest cost.
+ *
+ */
+
+
+
+
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
